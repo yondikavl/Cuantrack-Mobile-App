@@ -35,7 +35,12 @@ class _AddTransactionState extends State<AddTransaction> {
   Widget build(BuildContext context) {
     return Card(
       elevation: 8,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16),
+          topRight: Radius.circular(16),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -43,7 +48,7 @@ class _AddTransactionState extends State<AddTransaction> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Add New Transaction',
+              'Tambah transaksi',
               style: TextStyle(
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
@@ -52,7 +57,7 @@ class _AddTransactionState extends State<AddTransaction> {
             const SizedBox(height: 16),
             TextField(
               decoration: InputDecoration(
-                labelText: 'Title',
+                labelText: 'Judul',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -64,7 +69,7 @@ class _AddTransactionState extends State<AddTransaction> {
             const SizedBox(height: 12),
             TextField(
               decoration: InputDecoration(
-                labelText: 'Amount',
+                labelText: 'Jumlah',
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -79,7 +84,7 @@ class _AddTransactionState extends State<AddTransaction> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 const Text(
-                  'Is this income?',
+                  'Apakah ini pemasukan?',
                   style: TextStyle(fontSize: 16),
                 ),
                 Switch(
@@ -99,10 +104,14 @@ class _AddTransactionState extends State<AddTransaction> {
               width: double.infinity,
               child: ElevatedButton.icon(
                 onPressed: _submitData,
-                icon: const Icon(Icons.add),
+                icon: const Icon(
+                  Icons.add,
+                  color: Colors.white,
+                ),
                 label: const Text(
-                  'Add Transaction',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  'Tambah transaksi',
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold, color: Colors.white),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.green,

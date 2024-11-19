@@ -61,22 +61,35 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('CuanTracker'),
+        backgroundColor: Colors.green,
+        foregroundColor: Colors.white,
       ),
       body: Column(
         children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search Transactions',
-                prefixIcon: const Icon(Icons.search),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(12),
+          Container(
+            decoration: const BoxDecoration(color: Colors.green),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: TextField(
+                controller: _searchController,
+                decoration: InputDecoration(
+                  labelText: 'Cari transaksi',
+                  labelStyle: TextStyle(backgroundColor: Colors.green.shade100),
+                  prefixIcon: const Icon(Icons.search),
+                  fillColor: Colors.green.shade100,
+                  filled: true,
+                  border: InputBorder.none,
+                  enabledBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.transparent),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    borderSide: const BorderSide(color: Colors.transparent),
+                  ),
                 ),
+                onChanged: _filterTransactions,
               ),
-              onChanged:
-                  _filterTransactions, // Logika filter diterapkan di sini
             ),
           ),
           Expanded(
@@ -137,10 +150,11 @@ class _HomeScreenState extends State<HomeScreen> {
                               color: tx.isIncome ? Colors.green : Colors.red,
                             ),
                             child: Text(
-                              '${tx.isIncome ? '+ ' : '- '}\Rp.${tx.amount.toStringAsFixed(2)}',
+                              '${tx.isIncome ? '+ ' : '- '}Rp.${tx.amount.toStringAsFixed(2)}',
                               style: const TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 12,
                               ),
                             ),
                           ),
@@ -151,16 +165,22 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ],
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () => _startAddNewTransaction(context),
         backgroundColor: Colors.green,
-        shape: const CircleBorder(),
-        child: const Icon(
+        icon: const Icon(
           Icons.add,
           color: Colors.white,
         ),
-        onPressed: () => _startAddNewTransaction(context),
+        label: const Text(
+          'Tambah',
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 16,
+          ),
+        ),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
     );
   }
 }
